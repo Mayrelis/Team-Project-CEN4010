@@ -1,0 +1,64 @@
+{% url 'home' as home_url %}
+{% url 'login' as login_url %}
+{% url 'register' as register_url %}
+{% load static %}
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
+        <!-- <a class="navbar-brand" href="{{ home_url }}"><img src="{% static 'img/logo1.svg' %}" width="160" height="30" class="d-inline-block align-top" alt="">{% if brand_name %} {{ brand_name }} {% else %} GeekText {% endif %}</a> -->
+        <a class="navbar-brand" href="{{ home_url }}"><img src="{% static 'img/logo1.svg' %}" width="160" height="30" class="d-inline-block align-top" alt=""></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <form class="form-inline my-0 my-lg-0">
+                <div class="col">
+                <input class="form-control mr-sm" type="search" placeholder="Search for any boook" aria-label="Search">
+                
+                <button class="btn-sm btn-success my-2 my-sm-0" type="submit">Search</button>
+            </div>
+        </form>
+        
+        <li class="nav-item dropdown my-2 my-lg-0 sm">
+                <a class="nav-item dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    All Categories
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Arts & Music</a>
+                    <a class="dropdown-item" href="#">Biographies</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+        </li>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+            <ul class="navbar-nav justify-content-end">
+                <li class="nav-item {% if request.path == home_url %} active {% endif %}">
+                    <a class="nav-link active" href="{{ home_url }}">Home <span class="sr-only">(current)</span></a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Shopping Cart</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">WishList</a>
+                </li>
+                
+                
+                {% if request.user.is_authenticated %}
+                <li class="nav-item {% if request.path == login_url %} active {% endif %}">
+                    <a class="nav-link" href="{{ login_url }}">Logout</a>
+                </li>
+                {% else %}
+                <li class="nav-item {% if request.path == login_url %} active {% endif %}">
+                        <a class="nav-link" href="{{ register_url }}">Register</a>
+                    </li>
+                <li class="nav-item {% if request.path == register_url %} active {% endif %}">
+                    <a class="nav-link" href="{{ login_url }}">Login</a>
+                </li>
+                {% endif %}
+
+           
+
+            </ul>
+        </div>
+      </nav>
+   
