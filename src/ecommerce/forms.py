@@ -3,11 +3,10 @@ from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
-
 class ContactForm(forms.Form):
-    fullname = forms.CharField(widget=forms.TextInput(attrs={"class": "from-control","placeholder": "Your Name"}))
-    email    = forms.EmailField(widget=forms.EmailInput(attrs={"class" : "from-control","placeholder": "Content"}))
-    content = forms.CharField(widget=forms.Textarea(attrs={"class" : "from-control","placeholder": "Content"}))
+    fullname = forms.CharField(widget=forms.TextInput(attrs={ "class": "form-control", "placeholder":"Your full name"}))
+    email    = forms.EmailField(widget=forms.EmailInput(attrs={ "class": "form-control", "placeholder":" Your email"}))
+    content  = forms.CharField(widget=forms.Textarea(attrs={ "class": "form-control", "placeholder":"Your message"}))
 
     def clean_email(self):
         email = self.cleaned_data.get("email")
@@ -16,16 +15,19 @@ class ContactForm(forms.Form):
         return email
 
 class LoginForm(forms.Form):
-    
-    username = forms.CharField()
-    password = forms.CharField(widget=forms.PasswordInput)
+    username = forms.CharField(widget=forms.TextInput(attrs={ "class": "form-control", "placeholder":"Your username"}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={ "class": "form-control", "placeholder":"Your password"}))
 
 class RegisterForm(forms.Form):
     
-    email = forms.EmailField()
-    username = forms.CharField()
-    password = forms.CharField(widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Confirm Password', widget = forms.PasswordInput)
+    email = forms.EmailField(widget=forms.EmailInput(
+        attrs={"class": "from-control", "placeholder": "Your email"}))
+    username = forms.CharField(widget=forms.TextInput(
+        attrs={"class": "from-control", "placeholder": "Your userame"}))
+    password = forms.CharField(widget=forms.PasswordInput(
+        attrs={"class": "from-control", "placeholder": "Your password"}))
+    password2 = forms.CharField(label='Confirm Password', widget=forms.PasswordInput(
+        attrs={"class": "from-control", "placeholder": "confirm password"}))
 
 
     def clean_username(self):
